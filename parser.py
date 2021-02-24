@@ -8,9 +8,9 @@ def load_KEGG(data_folder):
     infileID = os.path.abspath("/opt/biothings/GRCh37/kegg/april2011/EnsemblToKegg.tsv")
     assert os.path.exists(infileInfo)
     assert os.path.exists(infileID)
-    datInfo = pandas.read_csv(infileInfo,sep="\t",squeeze=True,quoting=csv.QUOTE_NONE).to_dict(orient='records')
-    datID = pandas.read_csv(infileID,sep="\t",squeeze=True,quoting=csv.QUOTE_NONE).to_dict(orient='records')
-    dat = datID.join(datInfo.set_index('kegg_id'), on='kegg_id')
+    datInfo = pandas.read_csv(infileInfo,sep="\t",squeeze=True,quoting=csv.QUOTE_NONE)
+    datID = pandas.read_csv(infileID,sep="\t",squeeze=True,quoting=csv.QUOTE_NONE)
+    dat = datID.join(datInfo.set_index('kegg_id'), on='kegg_id').to_dict(orient='records')
     results = {}
     for rec in dat:
         _id = rec["gene_id"]
