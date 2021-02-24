@@ -10,7 +10,7 @@ def load_KEGG(data_folder):
     assert os.path.exists(infileID)
     datInfo = pandas.read_csv(infileInfo,sep="\t",squeeze=True,quoting=csv.QUOTE_NONE).to_dict(orient='records')
     datID = pandas.read_csv(infileID,sep="\t",squeeze=True,quoting=csv.QUOTE_NONE).to_dict(orient='records')
-    dat = datID.join(other.set_index('kegg_id'), on='kegg_id')
+    dat = datID.join(datInfo.set_index('kegg_id'), on='kegg_id')
     results = {}
     for rec in dat:
         _id = rec["gene_id"]
